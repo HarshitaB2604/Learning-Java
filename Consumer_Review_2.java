@@ -7,10 +7,8 @@ import java.io.*;
 
 /**
  * Class that contains helper methods for the Review Lab
- * Change class name to Review when running it with TestReview.java file
- * name change is to sort it properly when saved
  **/
-public class Consumer_Review_2 {
+public class Review {
   
   private static HashMap<String, Double> sentiment = new HashMap<String, Double>();
   private static ArrayList<String> posAdjectives = new ArrayList<String>();
@@ -231,8 +229,38 @@ public class Consumer_Review_2 {
   
   //Write your starRating method here. This method should return an int rating from 0-4 based on the total
   //sentiment value of a review.
+  
+  /**
+   * So the explanation of this method didn't really make sense to me 
+   * so I just made the startRating method rate things from 1 to 4 stars
+   * file with a totalSentiment val of <= 5.0 gets 1 star
+   * file with a totalSentiment val of > 5.0 and <= 10 gets 2 stars
+   * file with a totalSentiment val of > 10.0 and <= 15 gets 3 stars
+   * file with a totalSentiment val of > 15 gets 4 stars
+  */
   public static int starRating(String fileName)
   {
-    return 0;
+    double totalSentiVal = totalSentiment(fileName);
+    
+    //the star rating
+    int star = 1; //automatic star rating is set to 1
+    
+    //file with a totalSentiment val of > 5.0 and <= 10 gets 2 stars
+    if(totalSentiVal > 5 && totalSentiVal <= 10)
+    {
+      star = 2;
+    }
+    //file with a totalSentiment val of > 10.0 and <= 15 gets 3 stars
+    else if(totalSentiVal > 10 && totalSentiVal <= 15)
+    {
+      star = 3;
+    }
+    //file with a totalSentiment val of > 15 gets 4 stars
+    else if(totalSentiVal > 15)
+    {
+      star = 4;
+    }
+    
+    return star;
   }
 }
